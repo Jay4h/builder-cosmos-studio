@@ -47,14 +47,14 @@ function Heatmap() {
         <div key={u} className="text-center text-xs text-muted-foreground">{u}</div>
       ))}
       {skills.map((s, row) => (
-        <>
-          <div key={s} className="text-xs text-muted-foreground">{s}</div>
+        <div key={s} className="contents">
+          <div className="text-xs text-muted-foreground">{s}</div>
           {units.map((_, col) => {
             const v = Math.abs(Math.sin(row * 2 + col)) * 100;
             const color = `hsl(210 80% ${90 - v / 2}% / 1)`;
             return <div key={`${s}-${col}`} className="h-6 rounded" style={{ backgroundColor: color }} />;
           })}
-        </>
+        </div>
       ))}
     </div>
   );
