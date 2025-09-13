@@ -22,7 +22,7 @@ export function createServer() {
   app.get("/api/demo", handleDemo);
 
   // Backend proxy: forwards to BACKEND_BASE_URL
-  app.all("/api/backend/*", handleProxy);
+  app.all("/api/backend/(.*)", handleProxy);
 
   return app;
 }
