@@ -12,6 +12,7 @@ import Layout from "@/components/app/Layout";
 import { AuthProvider } from "@/context/AuthContext";
 import Placeholder from "@/pages/Placeholder";
 import Personnel from "@/pages/Personnel";
+import Training from "@/pages/Training";
 
 const queryClient = new QueryClient();
 
@@ -27,7 +28,7 @@ const App = () => (
               <Route index element={<Index />} />
               <Route path="personnel" element={<Personnel />} />
               <Route path="allocation" element={<Placeholder title="Workforce Allocation" />} />
-              <Route path="training" element={<Placeholder title="Training Management" />} />
+              <Route path="training" element={<Training />} />
               <Route path="health" element={<Placeholder title="Health & Readiness" />} />
               <Route path="analytics" element={<Placeholder title="AI Insights" />} />
               <Route path="decisions" element={<Placeholder title="Decision Support" />} />

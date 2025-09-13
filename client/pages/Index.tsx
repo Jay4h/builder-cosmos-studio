@@ -70,10 +70,24 @@ export default function Dashboard() {
     return () => clearInterval(id);
   }, []);
 
+  const [overview, setOverview] = useState<null | import("@/lib/apiClient").DashboardOverview>(null);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const data = await (await import("@/lib/apiClient")).api.getOverview();
+        setOverview(data);
+      } catch (e) {
+        // backend not configured; ignore
+      }
+    };
+    load();
+  }, []);
+
   const totals = useMemo(() => {
-    const basePersonnel = 10200;
+    const basePersonnel = overview?.overview.total_personnel ?? 10200;
     const baseReadiness = 82;
-    const baseAttrition = 7.2;
+    const baseAttrition = (overview?.metrics?.average_attrition_risk ?? 0.072) * 100;
     const baseTraining = 76;
     const wave = Math.sin(tick / 2);
     return {
@@ -82,7 +96,7 @@ export default function Dashboard() {
       attrition: Math.max(0, baseAttrition + shock * 0.3 + (Math.cos(tick / 2) * 0.8)),
       training: Math.max(0, Math.min(100, baseTraining - shock * 0.4 + wave * 1.5)),
     };
-  }, [tick, shock]);
+  }, [tick, shock, overview]);
 
   return (
     <div className="space-y-6">
