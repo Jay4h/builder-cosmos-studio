@@ -8,6 +8,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import Layout from "@/components/app/Layout";
+import { AuthProvider } from "@/context/AuthContext";
+import Placeholder from "@/pages/Placeholder";
+import Personnel from "@/pages/Personnel";
 
 const queryClient = new QueryClient();
 
@@ -16,13 +20,23 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<Layout />}>
+              <Route index element={<Index />} />
+              <Route path="personnel" element={<Personnel />} />
+              <Route path="allocation" element={<Placeholder title="Workforce Allocation" />} />
+              <Route path="training" element={<Placeholder title="Training Management" />} />
+              <Route path="health" element={<Placeholder title="Health & Readiness" />} />
+              <Route path="analytics" element={<Placeholder title="AI Insights" />} />
+              <Route path="decisions" element={<Placeholder title="Decision Support" />} />
+              <Route path="security" element={<Placeholder title="Security & Access" />} />
+            </Route>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
