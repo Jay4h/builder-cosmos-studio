@@ -1,7 +1,13 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useAuth } from "@/context/AuthContext";
 import { Menu, Shield, Bell, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -36,12 +42,18 @@ export default function Layout() {
         <div className="mx-auto max-w-7xl px-4">
           <div className="flex h-16 items-center justify-between gap-3">
             <div className="flex items-center gap-3">
-              <button aria-label="Toggle menu" className="lg:hidden" onClick={() => setSidebarOpen((s) => !s)}>
+              <button
+                aria-label="Toggle menu"
+                className="lg:hidden"
+                onClick={() => setSidebarOpen((s) => !s)}
+              >
                 <Menu className="h-6 w-6" />
               </button>
               <div className="flex items-center gap-2">
                 <Shield className="h-6 w-6 text-primary" />
-                <span className="font-display text-lg font-semibold tracking-wide">{t("appTitle")}</span>
+                <span className="font-display text-lg font-semibold tracking-wide">
+                  {t("appTitle")}
+                </span>
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -57,7 +69,10 @@ export default function Layout() {
                   <SelectItem value="admin">Admin</SelectItem>
                 </SelectContent>
               </Select>
-              <Select value={language} onValueChange={(v) => setLanguage(v as any)}>
+              <Select
+                value={language}
+                onValueChange={(v) => setLanguage(v as any)}
+              >
                 <SelectTrigger className="w-[110px]">
                   <SelectValue placeholder={t("language")} />
                 </SelectTrigger>
@@ -69,7 +84,11 @@ export default function Layout() {
               <Button variant="ghost" size="icon" aria-label="Notifications">
                 <Bell className="h-5 w-5" />
               </Button>
-              <Button variant="outline" size="sm" className="hidden sm:inline-flex">
+              <Button
+                variant="outline"
+                size="sm"
+                className="hidden sm:inline-flex"
+              >
                 <LogOut className="h-4 w-4" />
                 <span className="ml-1">Logout</span>
               </Button>
@@ -79,7 +98,12 @@ export default function Layout() {
       </header>
       <div className="mx-auto max-w-7xl px-4">
         <div className="grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-6 py-6">
-          <aside className={cn("rounded-lg border bg-card p-3", !sidebarOpen && "hidden lg:block")}> 
+          <aside
+            className={cn(
+              "rounded-lg border bg-card p-3",
+              !sidebarOpen && "hidden lg:block",
+            )}
+          >
             <nav className="flex flex-col gap-1">
               {navItems.map((n) => (
                 <NavLink
@@ -88,7 +112,9 @@ export default function Layout() {
                   className={({ isActive }) =>
                     cn(
                       "rounded-md px-3 py-2 text-sm transition-colors hover:bg-accent hover:text-accent-foreground",
-                      isActive ? "bg-primary text-primary-foreground" : "text-foreground/80",
+                      isActive
+                        ? "bg-primary text-primary-foreground"
+                        : "text-foreground/80",
                     )
                   }
                   onClick={() => setSidebarOpen(false)}

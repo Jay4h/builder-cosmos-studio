@@ -95,7 +95,7 @@ type AuthContextValue = {
   language: Language;
   setLanguage: (l: Language) => void;
   hasPermission: (perm: string) => boolean;
-  t: (key: keyof typeof dict["en"]) => string;
+  t: (key: keyof (typeof dict)["en"]) => string;
 };
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -109,8 +109,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [language]);
 
   const value = useMemo<AuthContextValue>(() => {
-    const hasPermission = (perm: string) => rolePermissions[role]?.includes(perm) ?? false;
-    const t = (key: keyof typeof dict["en"]) => dict[language][key] ?? String(key);
+    const hasPermission = (perm: string) =>
+      rolePermissions[role]?.includes(perm) ?? false;
+    const t = (key: keyof (typeof dict)["en"]) =>
+      dict[language][key] ?? String(key);
     return { role, setRole, language, setLanguage, hasPermission, t };
   }, [role, language]);
 

@@ -8,8 +8,8 @@ export default function Placeholder({ title }: { title: string }) {
       </CardHeader>
       <CardContent>
         <p className="text-sm text-muted-foreground">
-          This page is a placeholder. Ask to generate this page's detailed UI next, and we will build it consistent with
-          the overall app design.
+          This page is a placeholder. Ask to generate this page's detailed UI
+          next, and we will build it consistent with the overall app design.
         </p>
       </CardContent>
     </Card>

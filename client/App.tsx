@@ -27,12 +27,27 @@ const App = () => (
             <Route element={<Layout />}>
               <Route index element={<Index />} />
               <Route path="personnel" element={<Personnel />} />
-              <Route path="allocation" element={<Placeholder title="Workforce Allocation" />} />
+              <Route
+                path="allocation"
+                element={<Placeholder title="Workforce Allocation" />}
+              />
               <Route path="training" element={<Training />} />
-              <Route path="health" element={<Placeholder title="Health & Readiness" />} />
-              <Route path="analytics" element={<Placeholder title="AI Insights" />} />
-              <Route path="decisions" element={<Placeholder title="Decision Support" />} />
-              <Route path="security" element={<Placeholder title="Security & Access" />} />
+              <Route
+                path="health"
+                element={<Placeholder title="Health & Readiness" />}
+              />
+              <Route
+                path="analytics"
+                element={<Placeholder title="AI Insights" />}
+              />
+              <Route
+                path="decisions"
+                element={<Placeholder title="Decision Support" />}
+              />
+              <Route
+                path="security"
+                element={<Placeholder title="Security & Access" />}
+              />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

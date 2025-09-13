@@ -21,13 +21,15 @@ export async function handleProxy(req: Request, res: Response) {
     const method = req.method.toUpperCase();
     const isBodyMethod = !["GET", "HEAD"].includes(method);
 
-    const body = isBodyMethod && req.body ? JSON.stringify(req.body) : undefined;
+    const body =
+      isBodyMethod && req.body ? JSON.stringify(req.body) : undefined;
 
     const resp = await fetch(url, {
       method,
       headers: {
         ...headers,
-        "content-type": headers["content-type"] || (body ? "application/json" : undefined),
+        "content-type":
+          headers["content-type"] || (body ? "application/json" : undefined),
       } as any,
       body,
     } as RequestInit);
@@ -42,6 +44,8 @@ export async function handleProxy(req: Request, res: Response) {
     const buffer = Buffer.from(await resp.arrayBuffer());
     res.send(buffer);
   } catch (err: any) {
-    res.status(502).json({ error: "Proxy error", details: err?.message ?? String(err) });
+    res
+      .status(502)
+      .json({ error: "Proxy error", details: err?.message ?? String(err) });
   }
 }
